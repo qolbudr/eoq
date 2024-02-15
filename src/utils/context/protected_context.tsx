@@ -8,7 +8,9 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
   // Listen for changes on loading and authUser, redirect if needed
   useEffect(() => {
-    if (!loading && !authUser) router.push('/login')
+    if (!loading && !authUser) return router.push('/login')
+
+    return router.push('/stok')
   }, [authUser, loading])
 
   return children;

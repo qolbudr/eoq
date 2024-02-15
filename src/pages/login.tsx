@@ -98,9 +98,9 @@ const LoginPage = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault()
-      setValues({...values, loading: true})
+      setValues({ ...values, loading: true })
       await auth.signInWithEmailAndPassword(values.email, values.password)
-      setValues({...values, loading: false})
+      setValues({ ...values, loading: false })
       router.replace('/stok')
     } catch (e) {
       Swal.fire({
@@ -115,60 +115,67 @@ const LoginPage = () => {
 
   return (
     <Box className='content-center'>
-      <Card sx={{ zIndex: 1 }}>
-        <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
-          <Box sx={{ mb: 6 }}>
-            <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              Selamat Datang! 👋🏻
-            </Typography>
-            <Typography variant='body2'>Login untuk mengakses {themeConfig.templateName}</Typography>
-          </Box>
-          <form onSubmit={onSubmit} autoComplete='off' method='POST'>
-            <TextField
-              onChange={handleChange('email')}
-              fullWidth
-              id='email'
-              label='Email'
-              sx={{ marginBottom: 4 }}
-              required={true}
-              value={values.email}
-              type='email'
-            />
-            <FormControl fullWidth>
-              <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
-              <OutlinedInput
-                required={true}
-                label='Password'
-                value={values.password}
-                id='auth-login-password'
-                onChange={handleChange('password')}
-                type={values.showPassword ? 'text' : 'password'}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton
-                      edge='end'
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      aria-label='toggle password visibility'
-                    >
-                      {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-            <Box
-              sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
-            >
-              <FormControlLabel control={<Checkbox />} label='Remember Me' />
-            </Box>
-            <Button disabled={values.loading} type={'submit'} fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }}>
-              {values.loading ? 'Sedang masuk....' : 'Masuk'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-      <FooterIllustrationsV1 />
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant='h6' sx={{ marginBottom: 8, fontWeight: 600, textAlign: "center" }}>
+          APLIKASI PENGENDALIAN PERSEDIAAN BAHAN BAKU <br /> PABRIK KABUL GROUP BERBASIS WEBSITE
+        </Typography>
+        <Box sx={{ justifyContent: 'center', display: 'flex'}}>
+          <Card sx={{ zIndex: 1 }}>
+            <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
+              <Box sx={{ mb: 6 }}>
+                <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5, textAlign: 'left' }}>
+                  Selamat Datang! 👋🏻
+                </Typography>
+                <Typography variant='body2' sx={{ textAlign: 'left' }}>Login untuk mengakses {themeConfig.templateName}</Typography>
+              </Box>
+              <form onSubmit={onSubmit} autoComplete='off' method='POST'>
+                <TextField
+                  onChange={handleChange('email')}
+                  fullWidth
+                  id='email'
+                  label='Email'
+                  sx={{ marginBottom: 4 }}
+                  required={true}
+                  value={values.email}
+                  type='email'
+                />
+                <FormControl fullWidth>
+                  <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
+                  <OutlinedInput
+                    required={true}
+                    label='Password'
+                    value={values.password}
+                    id='auth-login-password'
+                    onChange={handleChange('password')}
+                    type={values.showPassword ? 'text' : 'password'}
+                    endAdornment={
+                      <InputAdornment position='end'>
+                        <IconButton
+                          edge='end'
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          aria-label='toggle password visibility'
+                        >
+                          {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <Box
+                  sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
+                >
+                  <FormControlLabel control={<Checkbox />} label='Remember Me' />
+                </Box>
+                <Button disabled={values.loading} type={'submit'} fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }}>
+                  {values.loading ? 'Sedang masuk....' : 'Masuk'}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </Box>
+        <FooterIllustrationsV1 />
+      </Box>
     </Box>
   )
 }

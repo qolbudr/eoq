@@ -17,14 +17,22 @@ const Stock = (): JSX.Element => {
   const [values, setValues] = useState<StoreData>({
     buy: null,
     freqOrder: null,
-    month: 0,
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
     use: null
   })
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const handleChange = (prop: keyof StoreData) => (event: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: parseInt(event.target.value) })
+    if (prop == 'month') {
+      let date = new Date(event.target.value)
+      let month = date.getMonth()
+      let year = date.getFullYear()
+      setValues({ ...values, year: year, [prop]: month })
+    } else {
+      setValues({ ...values, [prop]: parseInt(event.target.value) })
+    }
   }
 
   useEffect(() => {
@@ -61,7 +69,8 @@ const Stock = (): JSX.Element => {
     setValues({
       buy: null,
       freqOrder: null,
-      month: 0,
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
       use: null
     })
   }
@@ -127,7 +136,7 @@ const Stock = (): JSX.Element => {
             Tambah Data
           </Typography>
           <form onSubmit={handleSubmit}>
-            <TextField
+            {/* <TextField
               onChange={handleChange('month')}
               sx={{ marginBottom: 4 }}
               id='outlined-select-month'
@@ -143,7 +152,18 @@ const Stock = (): JSX.Element => {
                   {option}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
+            <TextField
+              onChange={handleChange('month')}
+              fullWidth
+              id='outlined-select-montht'
+              label='Pilih Bulan'
+              hiddenLabel={true}
+              sx={{ marginBottom: 4 }}
+              required={true}
+              value={`${values.year}-${values.month.toString().length == 1 ? '0' + `${values.month + 1}` : values.month + 1}`}
+              type='month'
+            />
             <TextField
               onChange={handleChange('buy')}
               fullWidth
